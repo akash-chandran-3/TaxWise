@@ -1,0 +1,100 @@
+:root {
+  --bg: #f5f7fa;
+  --card: #ffffff;
+  --text: #1f2933;
+  --muted: #6b7785;
+  --border: #dde3ea;
+  --primary: #1d6fd8;
+  --success: #1a8f5a;
+  --success-bg: #e8f6ef;
+  --warning-bg: #fff7e0;
+  --warning-border: #f0c94a;
+  --error: #c62828;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+h1 { font-size: 1.5rem; margin: 0 0 1rem; }
+h2 { font-size: 1.15rem; margin: 0 0 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+a { color: var(--primary); }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+.muted { color: var(--muted); font-weight: normal; }
+.error { color: var(--error); margin: 0.5rem 0; }
+
+/* Nav bar */
+.navbar {
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem 1.5rem;
+  padding: 0.75rem 1rem; background: var(--card); border-bottom: 1px solid var(--border);
+}
+@media (max-width: 480px) { .navbar .muted { display: none; } } /* hide the user's name on phones */
+.brand { font-weight: 700; font-size: 1.2rem; text-decoration: none; color: var(--text); }
+.navbar nav { display: flex; align-items: center; gap: 1rem; }
+.navbar nav a { text-decoration: none; }
+.navbar nav a.active { font-weight: 600; }
+.link-button { background: none; border: none; color: var(--primary); padding: 0; cursor: pointer; font: inherit; }
+
+/* Cards and forms */
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; }
+.auth-card { max-width: 400px; margin: 3rem auto; }
+form label { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.9rem; margin-bottom: 0.9rem; }
+input, select { font: inherit; padding: 0.5rem 0.6rem; border: 1px solid var(--border); border-radius: 6px; }
+label.checkbox { flex-direction: row; align-items: center; gap: 0.5rem; }
+label.inline { flex-direction: row; align-items: center; gap: 0.5rem; display: flex; }
+button[type='submit'] {
+  font: inherit; padding: 0.6rem 1.2rem; border: none; border-radius: 6px;
+  background: var(--primary); color: white; cursor: pointer;
+}
+button:disabled { opacity: 0.6; cursor: default; }
+
+/* Tax page */
+.page-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.disclaimer {
+  background: var(--warning-bg); border: 1px solid var(--warning-border); border-radius: 8px;
+  padding: 0.75rem 1rem; margin-bottom: 1.25rem; font-size: 0.9rem;
+}
+.tax-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0 1.5rem; }
+.tax-form fieldset { border: none; padding: 0; margin: 0; }
+.tax-form legend { font-weight: 600; margin-bottom: 0.75rem; }
+.tax-form .error, .tax-form button { grid-column: 1 / -1; justify-self: start; }
+
+.banner {
+  background: var(--success-bg); color: var(--success); border-radius: 8px;
+  padding: 1rem; font-size: 1.2rem; text-align: center; margin: 1.5rem 0 1rem;
+}
+.regime-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 1rem; }
+.regime-card.recommended { border: 2px solid var(--success); }
+.badge { background: var(--success); color: white; font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 99px; }
+
+dl { margin: 0 0 1rem; }
+.line { display: flex; justify-content: space-between; padding: 0.25rem 0; }
+.line dt, .line dd { margin: 0; }
+.line.strong { font-weight: 600; border-top: 1px solid var(--border); margin-top: 0.25rem; padding-top: 0.5rem; }
+.line.total { font-weight: 700; font-size: 1.15rem; border-top: 2px solid var(--text); margin-top: 0.5rem; padding-top: 0.5rem; }
+
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-bottom: 1rem; }
+th, td { text-align: right; padding: 0.35rem 0.4rem; border-bottom: 1px solid var(--border); }
+th:first-child, td:first-child { text-align: left; }
+tr.faded td { color: var(--muted); }
+tfoot td { font-weight: 600; border-top: 2px solid var(--text); border-bottom: none; }
+
+/* Expenses page */
+.expense-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 1rem; margin-bottom: 1rem; }
+@media (max-width: 760px) { .expense-grid { grid-template-columns: minmax(0, 1fr); } }
+.chart-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 1rem; align-items: center; }
+.chart-box { max-width: 280px; width: 100%; margin: 0 auto; }
+.swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 0.4rem; }
+.empty { text-align: center; padding: 2rem 0; }
+.button-row { display: flex; gap: 0.75rem; align-items: center; }
+button.secondary { font: inherit; padding: 0.6rem 1.2rem; border: 1px solid var(--border); border-radius: 6px; background: white; cursor: pointer; }
+.link-button.danger { color: var(--error); }
+.table-scroll { overflow-x: auto; }
+.expense-table th:nth-child(-n + 3), .expense-table td:nth-child(-n + 3) { text-align: left; }
+.expense-table td:nth-child(3) { color: var(--muted); }
+.expense-table .actions { white-space: nowrap; }
+.expense-table .actions button + button { margin-left: 0.75rem; }
+tr.editing td { background: var(--warning-bg); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
