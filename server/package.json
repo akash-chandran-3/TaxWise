@@ -4,6 +4,9 @@
   "private": true,
   "description": "TaxWise API: Express + MySQL",
   "main": "src/server.js",
+  "engines": {
+    "node": ">=20.19"
+  },
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",

@@ -1,5 +1,7 @@
 // One place for every call to the backend. Adds the JWT and turns
 // error responses into thrown Errors carrying the server's message.
+// Paths are relative ("/api/..."): locally Vite's proxy forwards them to Express,
+// and when deployed Express serves this app itself, so it's the same origin.
 export async function api(path, { method = 'GET', body } = {}) {
   const token = localStorage.getItem('token');
   const headers = {};

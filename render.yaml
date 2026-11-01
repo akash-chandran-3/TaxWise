@@ -1,0 +1,37 @@
+# Render Blueprint: one free web service that runs Express and serves the
+# built React client. The MySQL database lives on Aiven (Render has no free MySQL).
+# Secrets marked `sync: false` are typed into the Render dashboard, never committed.
+services:
+  - type: web
+    name: taxwise
+    runtime: node
+    plan: free
+    # Build the client, install the server, then create the tables and tax rules.
+    # db:init is safe on every deploy: tables use CREATE ... IF NOT EXISTS and the
+    # seed replaces only the tax-rule rows, never user data.
+    buildCommand: >-
+      cd client && npm ci --include=dev && npm run build &&
+      cd ../server && npm ci && npm run db:init
+    startCommand: cd server && node src/server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: JWT_SECRET
+        generateValue: true # Render creates a random secret
+      - key: JWT_EXPIRES_IN
+        value: 1d
+      - key: DB_NAME
+        value: taxwise
+      - key: DB_SSL
+        value: "true"
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_SSL_CA
+        sync: false
